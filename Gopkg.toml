@@ -22,5 +22,25 @@
 
 
 [[constraint]]
+  name = "github.com/google/gops"
+  version = "0.3.2"
+
+[[constraint]]
+  name = "github.com/nsqio/go-nsq"
+  version = "1.0.7"
+
+[[constraint]]
+  name = "github.com/prometheus/client_golang"
+  version = "0.8.0"
+
+[[constraint]]
+  branch = "v1.0"
+  name = "gopkg.in/tokopedia/grace.v1"
+
+[[constraint]]
   branch = "v1.1"
   name = "gopkg.in/tokopedia/logging.v1"
+
+[[override]]
+  name = "github.com/apache/thrift"
+  version = "0.10.0"
