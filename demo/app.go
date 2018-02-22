@@ -8,7 +8,7 @@ import (
 
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 
-	"github.com/tokopedia/gosample/hello"
+	"github.com/tokopedia/learn-opentracing/demo/hello"
 	"github.com/tokopedia/logging/tracer"
 	"gopkg.in/tokopedia/grace.v1"
 	"gopkg.in/tokopedia/logging.v1"

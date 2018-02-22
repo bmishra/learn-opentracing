@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/opentracing/opentracing-go"
+	oLog "github.com/opentracing/opentracing-go/log"
 	"gopkg.in/tokopedia/logging.v1"
 )
 
@@ -57,6 +58,10 @@ func (hlm *HelloWorldModule) SayHelloWorld(w http.ResponseWriter, r *http.Reques
 func (hlm *HelloWorldModule) someSlowFuncWeWantToTrace(ctx context.Context, w http.ResponseWriter) {
 	span, ctx := opentracing.StartSpanFromContext(ctx, "someSlowFuncWeWantToTrace")
 	defer span.Finish()
+	span.LogFields(
+		oLog.String("slowFunc", "around 7 sec"),
+	)
+
 	//dummy time consuming functions
 	callRedis(ctx)
 	callDB(ctx)
