@@ -1,12 +1,18 @@
-* Learn Opentracing
-Vrinda Saxena
+OpenTracing - The long and the short story
+11:00 23 Feb 2018
+Tags: go, golang, opentracing, jaeger
 
-* Topics to cover
+Vrinda Saxena
+Software Engineer
+vrinda.saxena@tokopedia.com
+
+* Agenda
 
 - Opentracing
 - Tracer
 - Span
-- Code Examples
+- Jaeger
+- Code Examples & Demo
 
 * Opentracing - Introduction
 
@@ -33,24 +39,24 @@ A span is a logical representation of some work done in your application. Each s
 * Code Example :-
 
 Simple code (withour opentracing)
+  helloTo := “world”
+  helloStr := fmt.Sprintf("Hello, %s!", helloTo)
+  println(helloStr)
 
-helloTo := “world”
-    helloStr := fmt.Sprintf("Hello, %s!", helloTo)
-    println(helloStr)
-
-Output :- Hello, world!
+Output
+  Hello, world!
 
 
 * Code (with opentracing)
+  tracer := opentracing.GlobalTracer()
+  span := tracer.StartSpan("world")
+  helloTo := "World"
+  helloStr := fmt.Sprintf("Hello, %s!", helloTo)
+  println(helloStr)
+  span.Finish()
 
-tracer := opentracing.GlobalTracer()
-span := tracer.StartSpan("world")
-    helloTo := "World"
-    helloStr := fmt.Sprintf("Hello, %s!", helloTo)
-    println(helloStr)
-span.Finish()
-
-Output :- Hello, world!
+Output
+  Hello, world!
 
 We are using the following basic features of the OpenTracing API:
 - a tracer instance is used to start new spans via StartSpan function
@@ -70,7 +76,3 @@ Note :- The StartSpanFromContext function uses opentracing.GlobalTracer() to sta
 tracer, closer := tracing.Init("hello-world")
 defer closer.Close()
 opentracing.SetGlobalTracer(tracer)
-
-* Thank You
-
-
