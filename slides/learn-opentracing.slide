@@ -1,3 +1,13 @@
+*Learn Opentracing
+-Vrinda Saxena
+
+*Topics to cover
+
+-Opentracing
+-Tracer
+-Span
+-Code Examples
+
 *Opentracing
 
 By offering consistent, expressive, vendor-neutral APIs for popular platforms, OpenTracing makes it easy for developers to add (or switch) tracing implementations
@@ -88,11 +98,16 @@ However, if we run this program, we will see no difference, and no traces in the
 
 
 
-*Code (with opentracing and jaegar)
+*Code (with opentracing with context)
 
-tracer, closer := initJaeger("hello-world")
+span, _ := opentracing.StartSpanFromContext(ctx, "printHello")
+defer span.Finish()
+
+Note :- The StartSpanFromContext function uses opentracing.GlobalTracer() to start the new spans, so we need to initialize that global variable to our instance of Jaeger tracer:
+
+tracer, closer := tracing.Init("hello-world")
 defer closer.Close()
-helloTo := "World"
-    helloStr := fmt.Sprintf("Hello, %s!", helloTo)
-    println(helloStr)
+opentracing.SetGlobalTracer(tracer)
+
+
 
