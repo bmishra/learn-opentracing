@@ -1,36 +1,36 @@
-*Learn Opentracing
--Vrinda Saxena
+* Learn Opentracing
+Vrinda Saxena
 
-*Topics to cover
+* Topics to cover
 
--Opentracing
--Tracer
--Span
--Code Examples
+- Opentracing
+- Tracer
+- Span
+- Code Examples
 
-*Opentracing
+* Opentracing - Introduction
 
 By offering consistent, expressive, vendor-neutral APIs for popular platforms, OpenTracing makes it easy for developers to add (or switch) tracing implementations
 
 
-*Trace – surviving mark of an event or request
+* Trace – surviving mark of an event or request
 
 A trace tells the story of a transaction or workflow as it propagates through a (potentially distributed) system.
 
 Eg :- start time and finish time of a service
 
 
-*Span – an event's lifetime
+* Span – an event's lifetime
 
 A span is a logical representation of some work done in your application. Each span has these minimum attributes: an operation name, a start time, and a finish time.
 
 
-*Example :-
+* Example :-
 
 .image trace.png
 
 
-*Code Example :-
+* Code Example :-
 
 Simple code (withour opentracing)
 
@@ -41,7 +41,7 @@ helloTo := “world”
 Output :- Hello, world!
 
 
-*Code (with opentracing)
+* Code (with opentracing)
 
 tracer := opentracing.GlobalTracer()
 span := tracer.StartSpan("world")
@@ -50,20 +50,17 @@ span := tracer.StartSpan("world")
     println(helloStr)
 span.Finish()
 
-
 Output :- Hello, world!
 
-
 We are using the following basic features of the OpenTracing API:
-a tracer instance is used to start new spans via StartSpan function
-each span is given an operation name, "say-hello" in this case
-each span must be finished by calling its Finish() function
-the start and end timestamps of the span will be captured automatically by the tracer implementation
+- a tracer instance is used to start new spans via StartSpan function
+- each span is given an operation name, "say-hello" in this case
+- each span must be finished by calling its Finish() function
+- the start and end timestamps of the span will be captured automatically by the tracer implementation
+
 However, if we run this program, we will see no difference, and no traces in the tracing UI. That's because the function opentracing.GlobalTracer() returns a no-op tracer by default.
 
-
-
-*Code (with opentracing with context)
+* Code (with opentracing with context)
 
 span, _ := opentracing.StartSpanFromContext(ctx, "printHello")
 defer span.Finish()
@@ -74,5 +71,6 @@ tracer, closer := tracing.Init("hello-world")
 defer closer.Close()
 opentracing.SetGlobalTracer(tracer)
 
+* Thank You
 
 
