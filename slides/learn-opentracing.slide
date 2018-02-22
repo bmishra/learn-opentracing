@@ -25,44 +25,9 @@ Eg :- start time and finish time of a service
 A span is a logical representation of some work done in your application. Each span has these minimum attributes: an operation name, a start time, and a finish time.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 *Example :-
 
-
-
-*trace.png
-
-
-
-
-
-
+.image trace.png
 
 
 *Code Example :-
