@@ -16,19 +16,24 @@ vrinda.saxena@tokopedia.com
 
 * Opentracing - Introduction
 
-By offering consistent, expressive, vendor-neutral APIs for popular platforms, OpenTracing makes it easy for developers to add (or switch) tracing implementations
+OpenTracing makes it easy for developers to add (or switch) tracing implementations by offering 
+- consistent, 
+- expressive, 
+- vendor-neutral APIs for popular platforms, 
 
 
 * Trace – surviving mark of an event or request
 
-A trace tells the story of a transaction or workflow as it propagates through a (potentially distributed) system.
+- A trace tells the story of a transaction or workflow as it propagates through a (potentially distributed) system.
 
-Eg :- start time and finish time of a service
+- Eg :- start time and finish time of a service
 
 
 * Span – an event's lifetime
 
-A span is a logical representation of some work done in your application. Each span has these minimum attributes: an operation name, a start time, and a finish time.
+- A span is a logical representation of some work done in your application. 
+
+- Each span has these minimum attributes: an operation name, a start time, and a finish time.
 
 
 * Example :-
@@ -48,6 +53,7 @@ Output
 
 
 * Code (with opentracing)
+
   tracer := opentracing.GlobalTracer()
   span := tracer.StartSpan("world")
   helloTo := "World"
@@ -68,11 +74,11 @@ However, if we run this program, we will see no difference, and no traces in the
 
 * Code (with opentracing with context)
 
-span, _ := opentracing.StartSpanFromContext(ctx, "printHello")
-defer span.Finish()
+  span, _ := opentracing.StartSpanFromContext(ctx, "printHello")
+  defer span.Finish()
 
-Note :- The StartSpanFromContext function uses opentracing.GlobalTracer() to start the new spans, so we need to initialize that global variable to our instance of Jaeger tracer:
+- Note :- The StartSpanFromContext function uses opentracing.GlobalTracer() to start the new spans, so we need to initialize that global variable to our instance of Jaeger tracer:
 
-tracer, closer := tracing.Init("hello-world")
-defer closer.Close()
-opentracing.SetGlobalTracer(tracer)
+  tracer, closer := tracing.Init("hello-world")
+  defer closer.Close()
+  opentracing.SetGlobalTracer(tracer)
