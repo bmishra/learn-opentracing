@@ -1,10 +1,12 @@
-OpenTracing - The long and the short story
-11:00 23 Feb 2018
+OpenTracing
+The long and the short story
+23 Feb 2018
 Tags: go, golang, opentracing, jaeger
 
 Vrinda Saxena
 Software Engineer
 vrinda.saxena@tokopedia.com
+www.tokopedia.com
 
 * Agenda
 
@@ -16,10 +18,11 @@ vrinda.saxena@tokopedia.com
 
 * Opentracing - Introduction
 
-OpenTracing makes it easy for developers to add (or switch) tracing implementations by offering 
-- consistent, 
-- expressive, 
-- vendor-neutral APIs for popular platforms, 
+OpenTracing makes it easy for developers to add (or switch) tracing implementations by offering
+
+- Consistent,
+- Expressive,
+- Vendor-neutral APIs for popular platforms,
 
 
 * Trace – surviving mark of an event or request
@@ -31,17 +34,17 @@ OpenTracing makes it easy for developers to add (or switch) tracing implementati
 
 * Span – an event's lifetime
 
-- A span is a logical representation of some work done in your application. 
+- A span is a logical representation of some work done in your application.
 
 - Each span has these minimum attributes: an operation name, a start time, and a finish time.
 
 
-* Example :-
+* Example
 
 .image trace.png
 
 
-* Code Example :-
+* Code
 
 Simple code (without opentracing)
 
@@ -50,10 +53,10 @@ Simple code (without opentracing)
   println(helloStr)
 
 Output
+
   Hello, world!
 
-
-* Code (with opentracing)
+With opentracing
 
   tracer := opentracing.GlobalTracer()
   span := tracer.StartSpan("world")
@@ -63,22 +66,26 @@ Output
   span.Finish()
 
 Output
+
   Hello, world!
 
+*
+
 We are using the following basic features of the OpenTracing API:
+
 - a tracer instance is used to start new spans via StartSpan function
 - each span is given an operation name, "say-hello" in this case
 - each span must be finished by calling its Finish() function
 - the start and end timestamps of the span will be captured automatically by the tracer implementation
 
-However, if we run this program, we will see no difference, and no traces in the tracing UI. That's because the function opentracing.GlobalTracer() returns a no-op tracer by default.
+However, if we run this program, we will see no difference, and no traces in the tracing UI. That's because the function `opentracing.GlobalTracer()`` returns a no-op tracer by default.
 
 * Code (with opentracing with context)
 
   span, _ := opentracing.StartSpanFromContext(ctx, "printHello")
   defer span.Finish()
 
-- Note :- The StartSpanFromContext function uses opentracing.GlobalTracer() to start the new spans, so we need to initialize that global variable to our instance of Jaeger tracer:
+- Note :- The `StartSpanFromContext` function uses `opentracing.GlobalTracer()` to start the new spans, so we need to initialize that global variable
 
   tracer, closer := tracing.Init("hello-world")
   defer closer.Close()
